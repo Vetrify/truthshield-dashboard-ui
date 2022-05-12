@@ -1,0 +1,22 @@
+.emerald {
+  --tw-color-primary-50: 236 253 245;
+  --tw-color-primary-100: 209 250 229;
+  --tw-color-primary-200: 167 243 208;
+  --tw-color-primary-300: 110 231 183;
+  --tw-color-primary-400: 52 211 153;
+  --tw-color-primary-500: 16 185 129;
+  --tw-color-primary-600: 5 150 105;
+  --tw-color-primary-700: 4 120 87;
+  --tw-color-primary-800: 6 95 70;
+  --tw-color-primary-900: 6 78 59;
+  --color-primary-50: rgb(var(--tw-color-primary-50)); /* #ecfdf5 */
+  --color-primary-100: rgb(var(--tw-color-primary-100)); /* #d1fae5 */
+  --color-primary-200: rgb(var(--tw-color-primary-200)); /* #a7f3d0 */
+  --color-primary-300: rgb(var(--tw-color-primary-300)); /* #6ee7b7 */
+  --color-primary-400: rgb(var(--tw-color-primary-400)); /* #34d399 */
+  --color-primary-500: rgb(var(--tw-color-primary-500)); /* #10b981 */
+  --color-primary-600: rgb(var(--tw-color-primary-600)); /* #059669 */
+  --color-primary-700: rgb(var(--tw-color-primary-700)); /* #047857 */
+  --color-primary-800: rgb(var(--tw-color-primary-800)); /* #065f46 */
+  --color-primary-900: rgb(var(--tw-color-primary-900)); /* #064e3b */
+}

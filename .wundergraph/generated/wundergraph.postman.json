@@ -1,0 +1,208 @@
+{
+  "item": [
+    {
+      "_": {
+        "postman_id": "Queries"
+      },
+      "id": "Queries",
+      "name": "Queries",
+      "description": {
+        "content": "All your query operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "FakeAdminPortal",
+          "name": "FakeAdminPortal",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "main",
+                "operations",
+                "FakeAdminPortal"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "FakeWeather",
+          "name": "FakeWeather",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "main",
+                "operations",
+                "FakeWeather"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "PastLaunches",
+          "name": "PastLaunches",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "main",
+                "operations",
+                "PastLaunches"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ProtectedWeather",
+          "name": "ProtectedWeather",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "main",
+                "operations",
+                "ProtectedWeather"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "forCity",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "Weather",
+          "name": "Weather",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "main",
+                "operations",
+                "Weather"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "forCity",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "_": {
+        "postman_id": "Mutations"
+      },
+      "id": "Mutations",
+      "name": "Mutations",
+      "description": {
+        "content": "All your mutation operations",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9991",
+      "key": "apiBaseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "Wundergraph",
+    "name": "Wundergraph",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Your Wundergraph collection",
+      "type": "text/plain"
+    }
+  }
+}
