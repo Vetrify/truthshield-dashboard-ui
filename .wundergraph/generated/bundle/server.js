@@ -481,15 +481,8 @@ var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((ser
         mockResolve: async (hookContext) => {
           return {
             data: {
-              getCityByName: {
-                id: "1",
-                name: "Berlin",
-                weather: {
-                  summary: {
-                    title: "Weather for Berlin",
-                    description: "0\xB0, cloudy"
-                  }
-                }
+              getAppState: {
+                id: "1234"
               }
             }
           };

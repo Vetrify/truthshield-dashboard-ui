@@ -481,15 +481,8 @@ var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((ser
         mockResolve: async (hookContext) => {
           return {
             data: {
-              getCityByName: {
-                id: "1",
-                name: "Berlin",
-                weather: {
-                  summary: {
-                    title: "Weather for Berlin",
-                    description: "0\xB0, cloudy"
-                  }
-                }
+              getAppState: {
+                id: "1234"
               }
             }
           };
@@ -584,9 +577,18 @@ var weather = import_sdk3.introspect.graphql({
   apiNamespace: "weather",
   url: "https://graphql-weather-api.herokuapp.com/"
 });
+var portal = import_sdk3.introspect.openApi({
+  apiNamespace: "portal",
+  source: {
+    kind: "file",
+    filePath: "openapi.1.0.0.yaml"
+  },
+  headers: (builder) => builder.addStaticHeader("AuthToken", "staticToken").addClientRequestHeader("Authorization", "Authorization")
+});
 var myApplication = new import_sdk3.Application({
   name: "api",
   apis: [
+    portal,
     weather,
     spaceX
   ]

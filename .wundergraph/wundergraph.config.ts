@@ -22,6 +22,9 @@ const weather = introspect.graphql({
 
 
 
+
+
+
 /*const jsonPlaceholder = introspect.openApi({
     source: {
         kind: "file",
@@ -66,20 +69,30 @@ const federatedApi = introspect.federation({
     ]
 });*/
 
-/*
-uncomment this section to create an API from an OpenAPI Specification
 
-const openAPI = introspect.openApi({
+//create an API from an OpenAPI Specification
+
+
+// const portal = introspect.openApi({
+//   apiNamespace: 'portal',
+//   source: {
+//     kind: "file",
+//     filePath: "/.wundergraph/openapi.1.0.0.yaml",
+//   }
+// });
+
+const portal = introspect.openApi({
+    apiNamespace: "portal",
     source: {
         kind: "file",
-        filePath: "my_api_oas.json"
+        filePath: "openapi.1.0.0.yaml"
     },
     headers: builder => builder
         // add a static Header to all upstream Requests
         .addStaticHeader("AuthToken","staticToken")
         // forward the client Request header Authorization to the upstream request using the same Header name
         .addClientRequestHeader("Authorization","Authorization")
-});*/
+});
 
 /*
 uncomment this section to create an API from a GraphQL upstream
@@ -96,6 +109,7 @@ const graphQLAPI = introspect.graphql({
 const myApplication = new Application({
   name: 'api',
   apis: [
+    portal,
     weather,
     spaceX,
     //jspFieldsRenamed,

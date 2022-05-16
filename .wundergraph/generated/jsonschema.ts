@@ -34,24 +34,254 @@ const jsonSchema: Schema = {
 				data: {
 					type: "object",
 					properties: {
-						getCityByName: {
-							type: "object",
-							properties: {
-								id: { type: "string" },
-								name: { type: "string" },
-								weather: {
-									type: "object",
-									properties: {
-										summary: {
+						searchAccount: {
+							type: "array",
+							items: {
+								type: "object",
+								properties: {
+									companyId: { type: "string" },
+									products: {
+										type: "array",
+										items: {
 											type: "object",
-											properties: { title: { type: "string" }, description: { type: "string" } },
+											properties: {
+												id: { type: "string" },
+												name: { type: "string" },
+												subscriptionIds: { type: "array", items: { type: "string" } },
+												roles: {
+													type: "array",
+													items: {
+														type: "object",
+														properties: {
+															name: { type: "string" },
+															description: { type: "string" },
+															userCap: { type: "integer" },
+														},
+														additionalProperties: false,
+														required: ["name", "description", "userCap"],
+													},
+												},
+											},
 											additionalProperties: false,
+											required: ["id", "name", "roles"],
 										},
 									},
-									additionalProperties: false,
+									subscriptions: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												id: { type: "string" },
+												application: { type: "string" },
+												status: { type: "string" },
+												cancelAt: { type: "string" },
+												cancelAtPeriodEnd: { type: "boolean" },
+												canceledAt: { type: "string" },
+												collectionMethod: { type: "string" },
+												created: { type: "string" },
+												createdByUserId: { type: "string" },
+												currentPeriodEnd: { type: "string" },
+												currentPeriodStart: { type: "string" },
+												daysUntilDueue: { type: "integer" },
+												description: { type: "string" },
+												discount: { type: "string" },
+												endedAt: { type: "string" },
+												currency: { type: "string" },
+												type: { type: "string" },
+												items: {
+													type: "array",
+													items: {
+														type: "object",
+														properties: {
+															id: { type: "string" },
+															created: { type: "integer" },
+															metadata: {
+																type: "array",
+																items: {
+																	type: "object",
+																	properties: {
+																		name: { type: "string" },
+																		type: { type: "string" },
+																		value: { type: "string" },
+																	},
+																	additionalProperties: false,
+																},
+															},
+															price: {},
+															quantity: { type: "integer" },
+															subscription: { type: "string" },
+														},
+														additionalProperties: false,
+														required: ["id", "created", "metadata", "price", "quantity", "subscription"],
+													},
+												},
+											},
+											additionalProperties: false,
+											required: [
+												"id",
+												"application",
+												"status",
+												"cancelAt",
+												"cancelAtPeriodEnd",
+												"canceledAt",
+												"collectionMethod",
+												"created",
+												"createdByUserId",
+												"currentPeriodEnd",
+												"currentPeriodStart",
+												"daysUntilDueue",
+												"description",
+												"discount",
+												"endedAt",
+												"currency",
+												"type",
+												"items",
+											],
+										},
+									},
+									users: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												id: { type: "string" },
+												firstName: { type: "string" },
+												lastName: { type: "string" },
+												email: { type: "string" },
+												status: { type: "string" },
+												roles: {
+													type: "array",
+													items: {
+														type: "object",
+														properties: {
+															productId: { type: "string" },
+															roles: { type: "array", items: { type: "string" } },
+														},
+														additionalProperties: false,
+														required: ["productId", "roles"],
+													},
+												},
+											},
+											additionalProperties: false,
+											required: ["id", "firstName", "lastName", "email", "status", "roles"],
+										},
+									},
+									requests: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												id: { type: "string" },
+												type: { type: "string" },
+												title: { type: "string" },
+												imageUrl: { type: "string" },
+												timestamp: { type: "string" },
+												cost: { type: "string" },
+												recurring: { type: "string" },
+												note: { type: "string" },
+												userId: { type: "string" },
+												statusId: { type: "string" },
+												statusTitle: { type: "string" },
+												typeId: { type: "string" },
+												typeTitle: { type: "string" },
+												productId: { type: "string" },
+												actions: {
+													type: "array",
+													items: {
+														type: "object",
+														properties: {
+															key: { type: "string" },
+															description: { type: "string" },
+															reasonNeeded: { type: "boolean" },
+														},
+														additionalProperties: false,
+														required: ["key", "description", "reasonNeeded"],
+													},
+												},
+											},
+											additionalProperties: false,
+											required: [
+												"id",
+												"type",
+												"title",
+												"imageUrl",
+												"timestamp",
+												"cost",
+												"recurring",
+												"note",
+												"userId",
+												"statusId",
+												"statusTitle",
+												"typeId",
+												"typeTitle",
+												"productId",
+												"actions",
+											],
+										},
+									},
+									actionRequests: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												requestId: { type: "string" },
+												action: { type: "string" },
+												reason: { type: "string" },
+											},
+											additionalProperties: false,
+											required: ["action"],
+										},
+									},
+									userInvitations: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												email: { type: "string" },
+												phone: { type: "string" },
+												access: {
+													type: "array",
+													items: {
+														type: "object",
+														properties: {
+															productId: { type: "string" },
+															roles: { type: "array", items: { type: "string" } },
+														},
+														additionalProperties: false,
+														required: ["productId", "roles"],
+													},
+												},
+											},
+											additionalProperties: false,
+											required: ["email", "phone", "access"],
+										},
+									},
+									payments: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												id: { type: "string" },
+												amount: { type: "integer" },
+												timestamp: { type: "string" },
+											},
+											additionalProperties: false,
+											required: ["id", "amount", "timestamp"],
+										},
+									},
 								},
+								additionalProperties: false,
+								required: [
+									"companyId",
+									"products",
+									"subscriptions",
+									"users",
+									"requests",
+									"actionRequests",
+									"userInvitations",
+									"payments",
+								],
 							},
-							additionalProperties: false,
 						},
 					},
 					additionalProperties: false,

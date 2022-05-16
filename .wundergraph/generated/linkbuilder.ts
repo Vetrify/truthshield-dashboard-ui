@@ -73,6 +73,64 @@ const targetStep = <T, F extends keyof T, R>(field: F) => ({
 });
 
 interface TargetTypes {
+	portal_portal:
+		| "companyId"
+		| "products"
+		| "subscriptions"
+		| "users"
+		| "requests"
+		| "actionRequests"
+		| "userInvitations"
+		| "payments"
+		| "_join";
+	portal_product: "id" | "name" | "subscriptionIds" | "roles" | "_join";
+	portal_productRole: "name" | "description" | "userCap" | "_join";
+	portal_subscription:
+		| "id"
+		| "application"
+		| "status"
+		| "cancelAt"
+		| "cancelAtPeriodEnd"
+		| "canceledAt"
+		| "collectionMethod"
+		| "created"
+		| "createdByUserId"
+		| "currentPeriodEnd"
+		| "currentPeriodStart"
+		| "daysUntilDueue"
+		| "description"
+		| "discount"
+		| "endedAt"
+		| "currency"
+		| "type"
+		| "items"
+		| "_join";
+	portal_subscriptionItem: "id" | "created" | "metadata" | "price" | "quantity" | "subscription" | "_join";
+	portal_metadata: "name" | "type" | "value" | "_join";
+	portal_user: "id" | "firstName" | "lastName" | "email" | "status" | "roles" | "_join";
+	portal_role: "productId" | "roles" | "_join";
+	portal_request:
+		| "id"
+		| "type"
+		| "title"
+		| "imageUrl"
+		| "timestamp"
+		| "cost"
+		| "recurring"
+		| "note"
+		| "userId"
+		| "statusId"
+		| "statusTitle"
+		| "typeId"
+		| "typeTitle"
+		| "productId"
+		| "actions"
+		| "_join";
+	portal_requestAction: "key" | "description" | "reasonNeeded" | "_join";
+	portal_actionRequest: "requestId" | "action" | "reason" | "_join";
+	portal_userInvitation: "email" | "phone" | "access" | "_join";
+	portal_payment: "id" | "amount" | "timestamp" | "_join";
+	portal_ack: "success" | "messages" | "_join";
 	weather_City: "id" | "name" | "country" | "coord" | "weather" | "_join";
 	weather_Coordinates: "lon" | "lat" | "_join";
 	weather_Summary: "title" | "description" | "icon" | "_join";
@@ -390,6 +448,8 @@ interface TargetTypes {
 }
 
 interface SourceFields {
+	portal_searchAccount: {};
+	portal_searchRequests: {};
 	weather_getCityByName: {
 		name: null;
 		country: null;
