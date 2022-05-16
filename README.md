@@ -1,11 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with `wunderctl init`
 
-
 ## Dev notes
 
 I'm getting the following error when running 'tsc --noEmit --incremental false' via `yarn typecheck` which causes the build to fail
 
-```TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & Props'.
+````TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & Props'.
 
 <WunderGraphProvider>```
 
@@ -29,7 +28,7 @@ Install the dependencies:
 npm install
 # or
 yarn
-```
+````
 
 Then, start the development server:
 
