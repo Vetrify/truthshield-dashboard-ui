@@ -35,7 +35,7 @@ import Seo from '@/components/Seo';
 //   return classes.filter(Boolean).join(' ');
 // }
 
-export default function TestPage() {
+export default function SketchPage() {
   const data = useQuery.AdminPortal(); // hits service on page load
 
   return (
