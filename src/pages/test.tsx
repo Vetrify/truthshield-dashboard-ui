@@ -31,9 +31,9 @@ import Seo from '@/components/Seo';
  * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
  */
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
+// function classNames(...classes: string[]) {
+//   return classes.filter(Boolean).join(' ');
+// }
 
 export default function TestPage() {
   const data = useQuery.AdminPortal(); // hits service on page load

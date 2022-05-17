@@ -163,7 +163,7 @@ export default configureWunderGraphServer<HooksConfig,
     InternalClient>((serverContext) => ({
     hooks: {
         queries: {
-					FakeAdminPortal: {
+					AdminPortal: {
 						mockResolve: async (hookContext) => {
 								return {
 										data: {

@@ -8,10 +8,7 @@ const url = '/images/header2.jpg';
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
 
-  const {
-    user,
-    client: { login, logout },
-  } = useWunderGraph();
+  const { user } = useWunderGraph();
 
   return (
     <>
