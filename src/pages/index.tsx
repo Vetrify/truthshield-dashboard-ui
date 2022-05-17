@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /*
   This example requires Tailwind CSS v2.0+ 
   
@@ -25,7 +26,6 @@ import {
 } from '@heroicons/react/solid';
 import * as React from 'react';
 
-import { useQuery, useWunderGraph } from '@/components/generated/hooks';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 
@@ -75,8 +75,8 @@ function classNames(...classes: string[]) {
 // to customize the default configuration.
 
 export default function HomePage() {
-  const { user, login, logout } = useWunderGraph();
-  const { result: userInfo } = useQuery.FakeWeather;
+  // const { user, login, logout } = useWunderGraph();
+  // const { result: userInfo } = useQuery.;
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}

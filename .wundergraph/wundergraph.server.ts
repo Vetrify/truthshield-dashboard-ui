@@ -167,20 +167,13 @@ export default configureWunderGraphServer<HooksConfig,
 						mockResolve: async (hookContext) => {
 								return {
 										data: {
-												getCityByName: {
-														id: "1",
-														name: "Berlin",
-														weather: {
-																summary: {
-																		title: "Weather for Berlin",
-																		description: "0°, cloudy",
-																},
-														},
-												},
-										},
-								};
+												getAppState: { 
+													id:"1234",
+												}},
+										};
+								},
 						},
-				},
+			
             FakeWeather: {
                 mockResolve: async (hookContext) => {
                     return {

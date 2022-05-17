@@ -237,64 +237,9 @@ directive @transform(
   get: String
 ) on FIELD
 
-type weather_City {
-  id: ID
-  name: String
-  country: String
-  coord: weather_Coordinates
-  weather: weather_Weather
-  _join: Query!
-}
-
-type weather_Coordinates {
-  lon: Float
-  lat: Float
-  _join: Query!
-}
-
-type weather_Summary {
-  title: String
-  description: String
-  icon: String
-  _join: Query!
-}
-
-type weather_Temperature {
-  actual: Float
-  feelsLike: Float
-  min: Float
-  max: Float
-  _join: Query!
-}
-
-type weather_Wind {
-  speed: Float
-  deg: Int
-  _join: Query!
-}
-
-type weather_Clouds {
-  all: Int
-  visibility: Int
-  humidity: Int
-  _join: Query!
-}
-
-type weather_Weather {
-  summary: weather_Summary
-  temperature: weather_Temperature
-  wind: weather_Wind
-  clouds: weather_Clouds
-  timestamp: Int
-  _join: Query!
-}
-
-input weather_ConfigInput {
-  units: weather_Unit
-  lang: weather_Language
-}
-
 type Query {
+  portal_searchAccount: [portal_portal]
+  portal_searchRequests: [portal_request]
   weather_getCityByName(name: String!, country: String, config: weather_ConfigInput): weather_City
   weather_getCityById(id: [String!], config: weather_ConfigInput): [weather_City]
   """
@@ -367,6 +312,253 @@ type Query {
   spacex_shipsResult(find: spacex_ShipsFind, limit: Int, offset: Int, order: String, sort: String): spacex_ShipsResult
   spacex_ship(id: ID!): spacex_Ship
   gql_hello: String
+}
+
+type Mutation {
+  portal_administer(postPortalInput: portal_administerCommandInput!): portal_ack
+  """
+  delete data from the table: "users"
+  """
+  spacex_delete_users(
+    """filter the rows which have to be deleted"""
+    where: spacex_users_bool_exp!
+  ): spacex_users_mutation_response
+  """
+  insert data into the table: "users"
+  """
+  spacex_insert_users(
+    """the rows to be inserted"""
+    objects: [spacex_users_insert_input!]!
+    """on conflict condition"""
+    on_conflict: spacex_users_on_conflict
+  ): spacex_users_mutation_response
+  """
+  update data of the table: "users"
+  """
+  spacex_update_users(
+    """sets the columns of the filtered rows to the given values"""
+    _set: spacex_users_set_input
+    """filter the rows which have to be updated"""
+    where: spacex_users_bool_exp!
+  ): spacex_users_mutation_response
+}
+
+type portal_portal {
+  companyId: String!
+  products: [portal_product]!
+  subscriptions: [portal_subscription]!
+  users: [portal_user]!
+  requests: [portal_request]!
+  actionRequests: [portal_actionRequest]!
+  userInvitations: [portal_userInvitation]!
+  payments: [portal_payment]!
+  _join: Query!
+}
+
+type portal_product {
+  id: String!
+  name: String!
+  subscriptionIds: [String]
+  roles: [portal_productRole]!
+  _join: Query!
+}
+
+type portal_productRole {
+  name: String!
+  description: String!
+  userCap: Int!
+  _join: Query!
+}
+
+type portal_subscription {
+  id: String!
+  application: String!
+  status: String!
+  cancelAt: String!
+  cancelAtPeriodEnd: Boolean!
+  canceledAt: String!
+  collectionMethod: String!
+  created: String!
+  createdByUserId: String!
+  currentPeriodEnd: String!
+  currentPeriodStart: String!
+  daysUntilDueue: Int!
+  description: String!
+  discount: String!
+  endedAt: String!
+  currency: String!
+  type: String!
+  items: [portal_subscriptionItem]!
+  _join: Query!
+}
+
+type portal_subscriptionItem {
+  id: String!
+  created: Int!
+  metadata: [portal_metadata]!
+  price: JSON!
+  quantity: Int!
+  subscription: String!
+  _join: Query!
+}
+
+type portal_metadata {
+  name: String
+  type: String
+  value: String
+  _join: Query!
+}
+
+scalar JSON
+
+type portal_user {
+  id: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  status: String!
+  roles: [portal_role]!
+  _join: Query!
+}
+
+type portal_role {
+  productId: String!
+  roles: [String]!
+  _join: Query!
+}
+
+type portal_request {
+  id: String!
+  type: String!
+  title: String!
+  imageUrl: String!
+  timestamp: String!
+  cost: String!
+  recurring: String!
+  note: String!
+  userId: String!
+  statusId: String!
+  statusTitle: String!
+  typeId: String!
+  typeTitle: String!
+  productId: String!
+  actions: [portal_requestAction]!
+  _join: Query!
+}
+
+type portal_requestAction {
+  key: String!
+  description: String!
+  reasonNeeded: Boolean!
+  _join: Query!
+}
+
+type portal_actionRequest {
+  requestId: String
+  action: String!
+  reason: String
+  _join: Query!
+}
+
+type portal_userInvitation {
+  email: String!
+  phone: String!
+  access: [portal_role]!
+  _join: Query!
+}
+
+type portal_payment {
+  id: String!
+  amount: Int!
+  timestamp: String!
+  _join: Query!
+}
+
+type portal_ack {
+  success: Boolean
+  messages: [String]
+  _join: Query!
+}
+
+input portal_administerCommandInput {
+  addUser: [portal_userInput]
+  userActions: [portal_userActionCommandInput]
+}
+
+input portal_userInput {
+  id: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  status: String!
+  roles: [portal_roleInput]!
+}
+
+input portal_roleInput {
+  productId: String!
+  roles: [String]!
+}
+
+input portal_userActionCommandInput {
+  userId: String
+  actions: [String]
+}
+
+type weather_City {
+  id: ID
+  name: String
+  country: String
+  coord: weather_Coordinates
+  weather: weather_Weather
+  _join: Query!
+}
+
+type weather_Coordinates {
+  lon: Float
+  lat: Float
+  _join: Query!
+}
+
+type weather_Summary {
+  title: String
+  description: String
+  icon: String
+  _join: Query!
+}
+
+type weather_Temperature {
+  actual: Float
+  feelsLike: Float
+  min: Float
+  max: Float
+  _join: Query!
+}
+
+type weather_Wind {
+  speed: Float
+  deg: Int
+  _join: Query!
+}
+
+type weather_Clouds {
+  all: Int
+  visibility: Int
+  humidity: Int
+  _join: Query!
+}
+
+type weather_Weather {
+  summary: weather_Summary
+  temperature: weather_Temperature
+  wind: weather_Wind
+  clouds: weather_Clouds
+  timestamp: Int
+  _join: Query!
+}
+
+input weather_ConfigInput {
+  units: weather_Unit
+  lang: weather_Language
 }
 
 enum weather_Unit {
@@ -1282,34 +1474,6 @@ type spacex_ShipsResult {
   result: spacex_Result
   data: [spacex_Ship]
   _join: Query!
-}
-
-type Mutation {
-  """
-  delete data from the table: "users"
-  """
-  spacex_delete_users(
-    """filter the rows which have to be deleted"""
-    where: spacex_users_bool_exp!
-  ): spacex_users_mutation_response
-  """
-  insert data into the table: "users"
-  """
-  spacex_insert_users(
-    """the rows to be inserted"""
-    objects: [spacex_users_insert_input!]!
-    """on conflict condition"""
-    on_conflict: spacex_users_on_conflict
-  ): spacex_users_mutation_response
-  """
-  update data of the table: "users"
-  """
-  spacex_update_users(
-    """sets the columns of the filtered rows to the given values"""
-    _set: spacex_users_set_input
-    """filter the rows which have to be updated"""
-    where: spacex_users_bool_exp!
-  ): spacex_users_mutation_response
 }
 
 """
