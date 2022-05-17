@@ -10,15 +10,15 @@ import server from './wundergraph.server';
 import operations from './wundergraph.operations';
 // import linkBuilder from "./generated/linkbuilder";
 
-const spaceX = introspect.graphql({
-  apiNamespace: 'spacex',
-  url: 'https://api.spacex.land/graphql/',
-});
+// const spaceX = introspect.graphql({
+//   apiNamespace: 'spacex',
+//   url: 'https://api.spacex.land/graphql/',
+// });
 
-const weather = introspect.graphql({
-  apiNamespace: 'weather',
-  url: 'https://graphql-weather-api.herokuapp.com/',
-});
+// const weather = introspect.graphql({
+//   apiNamespace: 'weather',
+//   url: 'https://graphql-weather-api.herokuapp.com/',
+// });
 
 
 
@@ -110,8 +110,8 @@ const myApplication = new Application({
   name: 'api',
   apis: [
     portal,
-    weather,
-    spaceX,
+    // weather,
+    // spaceX,
     //jspFieldsRenamed,
     /*federatedApi,
             openAPI,
@@ -150,7 +150,7 @@ configureWunderGraphApplication({
       ],
     },
     {
-      templates: [...templates.typescript.react],
+      templates: [...templates.typescript.nextjs],
       path: '../src/components/generated',
     },
   ],
@@ -163,8 +163,14 @@ configureWunderGraphApplication({
   },
   authentication: {
     cookieBased: {
-      providers: [authProviders.demo()],
-      authorizedRedirectUris: ['http://localhost:3000/authentication'],
+      providers: [
+        authProviders.demo(),
+        authProviders.google({
+          id: "google",
+          clientId: "xxx.apps.googleusercontent.com",
+          clientSecret: "xxx",
+      })],
+      authorizedRedirectUris: ['http://localhost:3000'],
     },
   },
   /*links: [

@@ -23,7 +23,6 @@ export const WunderGraphContext = createContext<Config | undefined>(undefined);
 
 export interface Props {
 	endpoint?: string;
-	children?: React.ReactNode;
 	extraHeaders?: { [key: string]: string };
 	customFetch?: (input: RequestInfo, init?: RequestInit) => Promise<globalThis.Response>;
 }
