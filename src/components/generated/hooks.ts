@@ -3,15 +3,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { WunderGraphContext } from "./provider";
 import { RequestOptions, MutateRequestOptions, SubscriptionRequestOptions, Response } from "@wundergraph/sdk";
-import {
-	ProtectedWeatherInput,
-	WeatherInput,
-	FakeAdminPortalResponse,
-	FakeWeatherResponse,
-	PastLaunchesResponse,
-	ProtectedWeatherResponse,
-	WeatherResponse,
-} from "./models";
+import { AdminPortalResponse } from "./models";
 
 export const useWunderGraph = () => {
 	const ctx = useContext(WunderGraphContext);
@@ -189,47 +181,15 @@ export const useLoadingComplete = (...responses: Response<any>[]) => {
 };
 
 export const useQuery = {
-	FakeAdminPortal: (options?: RequestOptions<never, FakeAdminPortalResponse>) => {
+	AdminPortal: (options?: RequestOptions<never, AdminPortalResponse>) => {
 		const { client } = useWunderGraph();
-		return Query(client.query.FakeAdminPortal, { requiresAuthentication: false }, options);
-	},
-	FakeWeather: (options?: RequestOptions<never, FakeWeatherResponse>) => {
-		const { client } = useWunderGraph();
-		return Query(client.query.FakeWeather, { requiresAuthentication: false }, options);
-	},
-	PastLaunches: (options?: RequestOptions<never, PastLaunchesResponse>) => {
-		const { client } = useWunderGraph();
-		return Query(client.query.PastLaunches, { requiresAuthentication: false }, options);
-	},
-	ProtectedWeather: (options: RequestOptions<ProtectedWeatherInput, ProtectedWeatherResponse>) => {
-		const { client } = useWunderGraph();
-		return Query(client.query.ProtectedWeather, { requiresAuthentication: true }, options);
-	},
-	Weather: (options: RequestOptions<WeatherInput, WeatherResponse>) => {
-		const { client } = useWunderGraph();
-		return Query(client.query.Weather, { requiresAuthentication: false }, options);
+		return Query(client.query.AdminPortal, { requiresAuthentication: false }, options);
 	},
 };
 
 export const useLiveQuery = {
-	FakeAdminPortal: (options?: SubscriptionRequestOptions) => {
+	AdminPortal: (options?: SubscriptionRequestOptions) => {
 		const { client } = useWunderGraph();
-		return Subscription(client.liveQuery.FakeAdminPortal, { requiresAuthentication: false }, options);
-	},
-	FakeWeather: (options?: SubscriptionRequestOptions) => {
-		const { client } = useWunderGraph();
-		return Subscription(client.liveQuery.FakeWeather, { requiresAuthentication: false }, options);
-	},
-	PastLaunches: (options?: SubscriptionRequestOptions) => {
-		const { client } = useWunderGraph();
-		return Subscription(client.liveQuery.PastLaunches, { requiresAuthentication: false }, options);
-	},
-	ProtectedWeather: (options: SubscriptionRequestOptions<ProtectedWeatherInput>) => {
-		const { client } = useWunderGraph();
-		return Subscription(client.liveQuery.ProtectedWeather, { requiresAuthentication: true }, options);
-	},
-	Weather: (options: SubscriptionRequestOptions<WeatherInput>) => {
-		const { client } = useWunderGraph();
-		return Subscription(client.liveQuery.Weather, { requiresAuthentication: false }, options);
+		return Subscription(client.liveQuery.AdminPortal, { requiresAuthentication: false }, options);
 	},
 };

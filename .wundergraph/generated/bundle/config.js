@@ -476,37 +476,7 @@ var mockData = Convert.toPortal(`{
 }`);
 var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((serverContext) => ({
   hooks: {
-    queries: {
-      FakeAdminPortal: {
-        mockResolve: async (hookContext) => {
-          return {
-            data: {
-              getAppState: {
-                id: "1234"
-              }
-            }
-          };
-        }
-      },
-      FakeWeather: {
-        mockResolve: async (hookContext) => {
-          return {
-            data: {
-              getCityByName: {
-                id: "1",
-                name: "Berlin",
-                weather: {
-                  summary: {
-                    title: "Weather for Berlin",
-                    description: "0\xB0, cloudy"
-                  }
-                }
-              }
-            }
-          };
-        }
-      }
-    },
+    queries: {},
     mutations: {}
   },
   graphqlServers: [
@@ -553,30 +523,11 @@ var wundergraph_operations_default = (0, import_sdk2.configureWunderGraphOperati
     }),
     mutations: (config) => __spreadValues({}, config),
     subscriptions: (config) => __spreadValues({}, config),
-    custom: {
-      ProtectedWeather: (config) => __spreadProps(__spreadValues({}, config), {
-        authentication: {
-          required: true
-        }
-      }),
-      PastLaunches: (config) => __spreadProps(__spreadValues({}, config), {
-        caching: __spreadProps(__spreadValues({}, config.caching), {
-          enable: true
-        })
-      })
-    }
+    custom: {}
   }
 });
 
 // wundergraph.config.ts
-var spaceX = import_sdk3.introspect.graphql({
-  apiNamespace: "spacex",
-  url: "https://api.spacex.land/graphql/"
-});
-var weather = import_sdk3.introspect.graphql({
-  apiNamespace: "weather",
-  url: "https://graphql-weather-api.herokuapp.com/"
-});
 var portal = import_sdk3.introspect.openApi({
   apiNamespace: "portal",
   source: {
@@ -588,9 +539,7 @@ var portal = import_sdk3.introspect.openApi({
 var myApplication = new import_sdk3.Application({
   name: "api",
   apis: [
-    portal,
-    weather,
-    spaceX
+    portal
   ]
 });
 (0, import_sdk3.configureWunderGraphApplication)({
@@ -606,7 +555,9 @@ var myApplication = new import_sdk3.Application({
       ]
     },
     {
-      templates: [...import_sdk3.templates.typescript.react],
+      templates: [
+        ...import_sdk3.templates.typescript.react
+      ],
       path: "../src/components/generated"
     }
   ],
@@ -615,8 +566,15 @@ var myApplication = new import_sdk3.Application({
   }),
   authentication: {
     cookieBased: {
-      providers: [import_sdk3.authProviders.demo()],
-      authorizedRedirectUris: ["http://localhost:3000/authentication"]
+      providers: [
+        import_sdk3.authProviders.demo(),
+        import_sdk3.authProviders.google({
+          id: "google",
+          clientId: "xxx.apps.googleusercontent.com",
+          clientSecret: "xxx"
+        })
+      ],
+      authorizedRedirectUris: ["http://localhost:3000"]
     }
   },
   security: {

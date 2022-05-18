@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import type { Response } from "@wundergraph/sdk";
-import { ProtectedWeatherInput, ProtectedWeatherResponse, WeatherInput, WeatherResponse } from "./models";
-import { useQuery, useLiveQuery } from "./hooks";
+
 import jsonSchema from "./jsonschema";
 import Form from "@rjsf/core";
 
@@ -15,103 +14,3 @@ export interface FormProps<T> {
 export interface MutationFormProps<T> extends FormProps<T> {
 	refetchMountedQueriesOnSuccess?: boolean;
 }
-
-export const ProtectedWeatherForm: React.FC<FormProps<Response<ProtectedWeatherResponse>>> = ({
-	onResult,
-	liveValidate,
-}) => {
-	const [formData, setFormData] = useState<ProtectedWeatherInput>();
-	const { response, refetch } = useQuery.ProtectedWeather({ input: formData });
-	useEffect(() => {
-		if (onResult) {
-			onResult(response);
-		}
-	}, [response]);
-	return (
-		<div>
-			<Form
-				schema={jsonSchema.ProtectedWeather.input}
-				formData={formData}
-				liveValidate={liveValidate}
-				onChange={(e) => {
-					setFormData(e.formData);
-				}}
-				onSubmit={async (e) => {
-					await refetch({ input: formData });
-				}}
-			/>
-		</div>
-	);
-};
-export const WeatherForm: React.FC<FormProps<Response<WeatherResponse>>> = ({ onResult, liveValidate }) => {
-	const [formData, setFormData] = useState<WeatherInput>();
-	const { response, refetch } = useQuery.Weather({ input: formData });
-	useEffect(() => {
-		if (onResult) {
-			onResult(response);
-		}
-	}, [response]);
-	return (
-		<div>
-			<Form
-				schema={jsonSchema.Weather.input}
-				formData={formData}
-				liveValidate={liveValidate}
-				onChange={(e) => {
-					setFormData(e.formData);
-				}}
-				onSubmit={async (e) => {
-					await refetch({ input: formData });
-				}}
-			/>
-		</div>
-	);
-};
-
-export const ProtectedWeatherLiveForm: React.FC<FormProps<Response<ProtectedWeatherResponse>>> = ({
-	onResult,
-	liveValidate,
-}) => {
-	const [formData, setFormData] = useState<ProtectedWeatherInput>();
-	const { response } = useLiveQuery.ProtectedWeather({ input: formData });
-	useEffect(() => {
-		if (onResult) {
-			onResult(response);
-		}
-	}, [response]);
-	return (
-		<div>
-			<Form
-				schema={jsonSchema.ProtectedWeather.input}
-				formData={formData}
-				liveValidate={liveValidate}
-				onChange={(e) => {
-					setFormData(e.formData);
-				}}
-				children={<></>}
-			/>
-		</div>
-	);
-};
-export const WeatherLiveForm: React.FC<FormProps<Response<WeatherResponse>>> = ({ onResult, liveValidate }) => {
-	const [formData, setFormData] = useState<WeatherInput>();
-	const { response } = useLiveQuery.Weather({ input: formData });
-	useEffect(() => {
-		if (onResult) {
-			onResult(response);
-		}
-	}, [response]);
-	return (
-		<div>
-			<Form
-				schema={jsonSchema.Weather.input}
-				formData={formData}
-				liveValidate={liveValidate}
-				onChange={(e) => {
-					setFormData(e.formData);
-				}}
-				children={<></>}
-			/>
-		</div>
-	);
-};

@@ -1,9 +1,15 @@
 import * as React from 'react';
 
+import AuthenticateButton from '../buttons/AuthenticateButton';
+import { useWunderGraph } from '../generated/hooks';
+
 const url = '/images/header2.jpg';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
+
+  const { user } = useWunderGraph();
+
   return (
     <>
       <div className='w-full'>
@@ -29,12 +35,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
                 <div className='mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center'>
                   <div className='space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0'>
-                    <a
-                      href='#'
-                      className='flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8'
-                    >
-                      Log In
-                    </a>
+                    <AuthenticateButton />
+                    {/* 
+                    else
+                     */}
                   </div>
                 </div>
               </div>
@@ -60,7 +64,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </div>
-      {children}
+
+      {user == null || <div>{children}</div>}
     </>
   );
 }
