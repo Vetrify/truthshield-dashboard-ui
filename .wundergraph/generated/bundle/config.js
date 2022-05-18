@@ -476,37 +476,7 @@ var mockData = Convert.toPortal(`{
 }`);
 var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((serverContext) => ({
   hooks: {
-    queries: {
-      FakeAdminPortal: {
-        mockResolve: async (hookContext) => {
-          return {
-            data: {
-              getAppState: {
-                id: "1234"
-              }
-            }
-          };
-        }
-      },
-      FakeWeather: {
-        mockResolve: async (hookContext) => {
-          return {
-            data: {
-              getCityByName: {
-                id: "1",
-                name: "Berlin",
-                weather: {
-                  summary: {
-                    title: "Weather for Berlin",
-                    description: "0\xB0, cloudy"
-                  }
-                }
-              }
-            }
-          };
-        }
-      }
-    },
+    queries: {},
     mutations: {}
   },
   graphqlServers: [
@@ -585,7 +555,9 @@ var myApplication = new import_sdk3.Application({
       ]
     },
     {
-      templates: [...import_sdk3.templates.typescript.nextjs],
+      templates: [
+        ...import_sdk3.templates.typescript.react
+      ],
       path: "../src/components/generated"
     }
   ],

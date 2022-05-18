@@ -163,35 +163,35 @@ export default configureWunderGraphServer<HooksConfig,
     InternalClient>((serverContext) => ({
     hooks: {
         queries: {
-					AdminPortal: {
-						mockResolve: async (hookContext) => {
-								return {
-										data: {
-												getAppState: { 
-													id:"1234",
-												}},
-										};
-								},
-						},
+					// AdminPortal: {
+					// 	mockResolve: async (hookContext) => {
+					// 			return {
+					// 					data: {
+					// 							getAppState: { 
+					// 								id:"1234",
+					// 							}},
+					// 					};
+					// 			},
+					// 	},
 			
-            FakeWeather: {
-                mockResolve: async (hookContext) => {
-                    return {
-                        data: {
-                            getCityByName: {
-                                id: "1",
-                                name: "Berlin",
-                                weather: {
-                                    summary: {
-                                        title: "Weather for Berlin",
-                                        description: "0°, cloudy",
-                                    },
-                                },
-                            },
-                        },
-                    };
-                },
-            },
+          //   FakeWeather: {
+          //       mockResolve: async (hookContext) => {
+          //           return {
+          //               data: {
+          //                   getCityByName: {
+          //                       id: "1",
+          //                       name: "Berlin",
+          //                       weather: {
+          //                           summary: {
+          //                               title: "Weather for Berlin",
+          //                               description: "0°, cloudy",
+          //                           },
+          //                       },
+          //                   },
+          //               },
+          //           };
+          //       },
+          //   },
         },
         mutations: {},
     },

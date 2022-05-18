@@ -28,7 +28,7 @@ export enum S3Provider {}
 const defaultWunderGraphContextProperties: WunderGraphContextProperties<Role> = {
 	ssrCache: {},
 	client: new Client({
-		applicationHash: "ae75ea4e",
+		applicationHash: "bce3986c",
 		applicationPath: "api/main",
 		baseURL: "http://localhost:9991",
 		sdkVersion: "1.0.0-next.31",
@@ -50,7 +50,7 @@ export const withWunderGraph = hooks.withWunderGraphContextWrapper(
 	defaultWunderGraphContextProperties
 );
 
-export const useWunderGraph = hooks.useWunderGraph<Role, AuthProvider, S3Provider>(WunderGraphContext);
+export const useWunderGraph = hooks.useWunderGraph<Role, AuthProvider>(WunderGraphContext);
 
 export const useQuery = {
 	AdminPortal: hooks.useQueryWithoutInput<AdminPortalResponseData, Role>(WunderGraphContext, {

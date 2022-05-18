@@ -150,7 +150,9 @@ configureWunderGraphApplication({
       ],
     },
     {
-      templates: [...templates.typescript.nextjs],
+      templates: [
+         ...templates.typescript.react
+        ],
       path: '../src/components/generated',
     },
   ],
