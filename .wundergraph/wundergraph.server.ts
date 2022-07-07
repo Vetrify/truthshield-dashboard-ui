@@ -1,8 +1,9 @@
 import {GraphQLObjectType, GraphQLSchema, GraphQLString,} from 'graphql';
 import {configureWunderGraphServer} from "@wundergraph/sdk";
-import type {HooksConfig} from "./generated/wundergraph.hooks";
 import type {InternalClient} from "./generated/wundergraph.internal.client";
 import { Convert } from '../src/utils/generated/ViewModel';
+import { HooksConfiguration } from '@wundergraph/sdk/dist/configure';
+import { time } from "console";
 
 const mockData = Convert.toPortal(`{
 	"companyId": "",
@@ -159,42 +160,28 @@ const mockData = Convert.toPortal(`{
 	]
 }`);
 
-export default configureWunderGraphServer<HooksConfig,
-    InternalClient>((serverContext) => ({
+export default configureWunderGraphServer<HooksConfiguration,InternalClient>(
+	() => ({
     hooks: {
-        queries: {
-					// AdminPortal: {
-					// 	mockResolve: async (hookContext) => {
-					// 			return {
-					// 					data: {
-					// 							getAppState: { 
-					// 								id:"1234",
-					// 							}},
-					// 					};
-					// 			},
-					// 	},
-			
-          //   FakeWeather: {
-          //       mockResolve: async (hookContext) => {
-          //           return {
-          //               data: {
-          //                   getCityByName: {
-          //                       id: "1",
-          //                       name: "Berlin",
-          //                       weather: {
-          //                           summary: {
-          //                               title: "Weather for Berlin",
-          //                               description: "0°, cloudy",
-          //                           },
-          //                       },
-          //                   },
-          //               },
-          //           };
-          //       },
-          //   },
+			global: {
+        httpTransport: {
+          onOriginRequest: {
+            enableForAllOperations: true,
+            hook: async ({ request, user }) => {
+              return {
+                ...request,
+                headers: {
+                  ...request.headers,
+                  Authorization: `Bearer ${user?.rawIdToken}`,
+                },
+              };
+            },
+          },
         },
-        mutations: {},
     },
+		queries: {},
+    mutations: {}, 
+	},
     graphqlServers: [
         {
             apiNamespace: "gql",
@@ -213,5 +200,7 @@ export default configureWunderGraphServer<HooksConfig,
                 }),
             }),
         }
-    ]
-}));
+    ],
+	})
+
+);

@@ -167,11 +167,18 @@ configureWunderGraphApplication({
     cookieBased: {
       providers: [
         authProviders.demo(),
-        authProviders.google({
-          id: "google",
-          clientId: "xxx.apps.googleusercontent.com",
-          clientSecret: "xxx",
-      })],
+      //   authProviders.google({
+      //     id: "google",
+      //     clientId: "xxx.apps.googleusercontent.com",
+      //     clientSecret: "xxx",
+      // }),
+      authProviders.openIdConnect({
+        id: "keycloak",
+        clientId: "test-client-app",
+        clientSecret: "xxxx-xxxx-xxxx-xxxx",
+        issuer: "xxxx-xxxx-xxxx-xxxx"
+      }),
+    ],
       authorizedRedirectUris: ['http://localhost:3000'],
     },
   },

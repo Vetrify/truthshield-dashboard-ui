@@ -28,6 +28,12 @@ export default configureWunderGraphOperations<OperationsConfiguration>({
             ...config,
         }),
         custom: {
+            AdminPortal: (config) => ({
+                ...config,
+                authentication: {
+                    required: true
+                }
+            })
             // ProtectedWeather: config => ({
             //     ...config,
             //     authentication: {

@@ -13,7 +13,7 @@ It's not handled on the server that's hosting the frontend.
 ```
 http://localhost:9991/api/main/auth/cookie/callback/github
 
-## Provider: google (OpenID Connect)
+## Provider: keycloak (OpenID Connect)
 
 ### Authorization Callback URL
 
@@ -23,5 +23,5 @@ Remember that the authentication flow is handled server-side, on the WunderNode.
 It's not handled on the server that's hosting the frontend.
 
 ```
-http://localhost:9991/api/main/auth/cookie/callback/google
+http://localhost:9991/api/main/auth/cookie/callback/keycloak
 ```

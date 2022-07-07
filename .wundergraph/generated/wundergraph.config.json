@@ -22,7 +22,7 @@
           "staleWhileRevalidate": 60
         },
         "authenticationConfig": {
-          "authRequired": false
+          "authRequired": true
         },
         "authorizationConfig": {
           "claims": [],
@@ -47,7 +47,7 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false,
+          "httpTransportOnRequest": true,
           "customResolve": false
         },
         "variablesConfiguration": {
@@ -75,12 +75,26 @@
           "customRest": {
             "fetch": {
               "method": 0,
+              "path": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": "/portal"
+              },
+              "baseUrl": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": "https://localhost:7254/TruthShield/customer-portal/1.0.0"
+              },
               "url": {
                 "kind": 0,
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "https://localhost:7254/TruthShield/customer-portal/1.0.0/portal"
+                "staticVariableContent": ""
               },
               "body": {
                 "kind": 0,
@@ -141,12 +155,26 @@
           "customRest": {
             "fetch": {
               "method": 1,
+              "path": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": "/portal"
+              },
+              "baseUrl": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": "https://localhost:7254/TruthShield/customer-portal/1.0.0"
+              },
               "url": {
                 "kind": 0,
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "https://localhost:7254/TruthShield/customer-portal/1.0.0/portal"
+                "staticVariableContent": ""
               },
               "body": {
                 "kind": 0,
@@ -207,12 +235,26 @@
           "customRest": {
             "fetch": {
               "method": 0,
+              "path": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": "/admin-requests"
+              },
+              "baseUrl": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": "https://localhost:7254/TruthShield/customer-portal/1.0.0"
+              },
               "url": {
                 "kind": 0,
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "https://localhost:7254/TruthShield/customer-portal/1.0.0/admin-requests"
+                "staticVariableContent": ""
               },
               "body": {
                 "kind": 0,
@@ -269,6 +311,20 @@
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
                 "staticVariableContent": "http://127.0.0.1:9992/gqls/gql/graphql"
+              },
+              "baseUrl": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": ""
+              },
+              "path": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "placeholderVariableName": "",
+                "staticVariableContent": ""
               },
               "method": 1,
               "body": {
@@ -896,24 +952,24 @@
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "xxx.apps.googleusercontent.com"
+                "staticVariableContent": "test-client-app"
               },
               "clientSecret": {
                 "kind": 0,
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "xxx"
+                "staticVariableContent": "xxxx-xxxx-xxxx-xxxx"
               },
               "issuer": {
                 "kind": 0,
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "https://accounts.google.com"
+                "staticVariableContent": "xxxx-xxxx-xxxx-xxxx"
               }
             },
-            "id": "google"
+            "id": "keycloak"
           }
         ],
         "authorizedRedirectUris": [
@@ -925,7 +981,28 @@
             "staticVariableContent": "http://localhost:3000"
           }
         ],
-        "authorizedRedirectUriRegexes": []
+        "authorizedRedirectUriRegexes": [],
+        "blockKey": {
+          "kind": 0,
+          "environmentVariableDefaultValue": "",
+          "environmentVariableName": "",
+          "placeholderVariableName": "",
+          "staticVariableContent": ""
+        },
+        "hashKey": {
+          "kind": 0,
+          "environmentVariableDefaultValue": "",
+          "environmentVariableName": "",
+          "placeholderVariableName": "",
+          "staticVariableContent": ""
+        },
+        "csrfSecret": {
+          "kind": 0,
+          "environmentVariableDefaultValue": "",
+          "environmentVariableName": "",
+          "placeholderVariableName": "",
+          "staticVariableContent": ""
+        }
       },
       "hooks": {
         "postAuthentication": false,

@@ -1,5 +1,5 @@
 {
-  searchAccount: portal_searchAccount() {
+  searchAccount: portal_searchAccount {
     companyId,
     products
     {
@@ -97,8 +97,5 @@
       amount,
       timestamp
     }
-
-
-    
   }
 }

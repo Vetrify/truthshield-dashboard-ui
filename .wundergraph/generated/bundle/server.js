@@ -1,7 +1,24 @@
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a2, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a2, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a2, prop, b[prop]);
+    }
+  return a2;
+};
+var __spreadProps = (a2, b) => __defProps(a2, __getOwnPropDescs(b));
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
@@ -474,8 +491,22 @@ var mockData = Convert.toPortal(`{
 	"payments": [
 	]
 }`);
-var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((serverContext) => ({
+var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)(() => ({
   hooks: {
+    global: {
+      httpTransport: {
+        onOriginRequest: {
+          enableForAllOperations: true,
+          hook: async ({ request, user }) => {
+            return __spreadProps(__spreadValues({}, request), {
+              headers: __spreadProps(__spreadValues({}, request.headers), {
+                Authorization: `Bearer ${user == null ? void 0 : user.rawIdToken}`
+              })
+            });
+          }
+        }
+      }
+    },
     queries: {},
     mutations: {}
   },

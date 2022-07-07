@@ -24,7 +24,6 @@ import {
   ThumbUpIcon,
   UserGroupIcon,
 } from '@heroicons/react/solid';
-import * as React from 'react';
 
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
@@ -52,19 +51,202 @@ const filters = [
   { name: 'All', href: '#', count: '20', current: false },
 ];
 
-const requests = [
-  {
-    name: 'Jane Cooper',
-    title: 'Paradigm Representative',
-    cost: '+$3.95/mo',
-    email: 'janecooper@example.com',
-    telephone: '+1-202-555-0170',
-    time: 'December 9 at 11:43 AM',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-  // More people...
-];
+const portal = {
+  requests: [
+    {
+      id: '72527f0a-193b-43ce-94d9-137e58dff6de',
+      type: 'Brief Type Description',
+      title: 'Paradigm Representative',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+      timestamp: new Date().toJSON().slice(0, 10),
+      cost: '+$3.95/mo',
+      recurring: 'monthly',
+      note: 'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+      // userId: "e2679f27-4056-4fa6-9a22-38baafdd430b",
+      statusId: '5',
+      statusTitle: 'pending',
+      typeId: 'e26eef27-4236-4fa9-9a22-38baafdd430b',
+      typeTitle: 'Request Type',
+      productId: '46421fd1-deda-46d1-bcbb-d80de53d40c5',
+      actions: [
+        {
+          key: 'approve',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: false,
+        },
+        {
+          key: 'deny',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: true,
+        },
+      ],
+      user: {
+        id: 'e2679f27-4056-4fa6-9a22-38baafdd430b8',
+        firstName: 'Matt',
+        lastName: 'Cochran',
+        email: 'matthew@cochranweb.com',
+        status: 'active',
+        roles: [
+          {
+            productId: '304ed8cf-d3ca-4fed-9fd5-b14eb4de4ed9',
+            roles: ['admin'],
+          },
+          {
+            productId: 'a5c0ddad-950b-45e3-8565-a6abbcdeae15',
+            roles: ['viewer'],
+          },
+        ],
+      },
+    },
+    {
+      id: '72527f0a-193b-43ce-94d9-137e58dff6de',
+      type: 'Brief Type Description',
+      title: 'Paradigm Representative',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+      timestamp: new Date().toJSON().slice(0, 10),
+      cost: '+$3.95/mo',
+      recurring: 'monthly',
+      note: 'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+      // userId: "e2679f27-4056-4fa6-9a22-38baafdd430b",
+      statusId: '5',
+      statusTitle: 'pending',
+      typeId: 'e26eef27-4236-4fa9-9a22-38baafdd430b',
+      typeTitle: 'Request Type',
+      productId: '46421fd1-deda-46d1-bcbb-d80de53d40c5',
+      actions: [
+        {
+          key: 'approve',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: false,
+        },
+        {
+          key: 'deny',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: true,
+        },
+      ],
+      user: {
+        id: 'e2679f27-4056-4fa6-9a22-38baafdd430b8',
+        firstName: 'Matt',
+        lastName: 'Cochran',
+        email: 'matthew@cochranweb.com',
+        status: 'active',
+        roles: [
+          {
+            productId: '304ed8cf-d3ca-4fed-9fd5-b14eb4de4ed9',
+            roles: ['admin'],
+          },
+          {
+            productId: 'a5c0ddad-950b-45e3-8565-a6abbcdeae15',
+            roles: ['viewer'],
+          },
+        ],
+      },
+    },
+    {
+      id: '72527f0a-193b-43ce-94d9-137e58dff6de',
+      type: 'Brief Type Description',
+      title: 'Paradigm Representative',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+      timestamp: new Date().toJSON().slice(0, 10),
+      cost: '+$3.95/mo',
+      recurring: 'monthly',
+      note: 'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+      // userId: "e2679f27-4056-4fa6-9a22-38baafdd430b",
+      statusId: '5',
+      statusTitle: 'pending',
+      typeId: 'e26eef27-4236-4fa9-9a22-38baafdd430b',
+      typeTitle: 'Request Type',
+      productId: '46421fd1-deda-46d1-bcbb-d80de53d40c5',
+      actions: [
+        {
+          key: 'approve',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: false,
+        },
+        {
+          key: 'deny',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: true,
+        },
+      ],
+      user: {
+        id: 'e2679f27-4056-4fa6-9a22-38baafdd430b8',
+        firstName: 'Matt',
+        lastName: 'Cochran',
+        email: 'matthew@cochranweb.com',
+        status: 'active',
+        roles: [
+          {
+            productId: '304ed8cf-d3ca-4fed-9fd5-b14eb4de4ed9',
+            roles: ['admin'],
+          },
+          {
+            productId: 'a5c0ddad-950b-45e3-8565-a6abbcdeae15',
+            roles: ['viewer'],
+          },
+        ],
+      },
+    },
+    {
+      id: '72527f0a-193b-43ce-94d9-137e58dff6de',
+      type: 'Brief Type Description',
+      title: 'Paradigm Representative',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+      timestamp: new Date().toJSON().slice(0, 10),
+      cost: '+$3.95/mo',
+      recurring: 'monthly',
+      note: 'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+      // userId: "e2679f27-4056-4fa6-9a22-38baafdd430b",
+      statusId: '5',
+      statusTitle: 'pending',
+      typeId: 'e26eef27-4236-4fa9-9a22-38baafdd430b',
+      typeTitle: 'Request Type',
+      productId: '46421fd1-deda-46d1-bcbb-d80de53d40c5',
+      actions: [
+        {
+          key: 'approve',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: false,
+        },
+        {
+          key: 'deny',
+          description:
+            'Repudiandae sint consequuntur vel. Amet ut nobis explicab numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
+          reasonNeeded: true,
+        },
+      ],
+      user: {
+        id: 'e2679f27-4056-4fa6-9a22-38baafdd430b8',
+        firstName: 'Matt',
+        lastName: 'Cochran',
+        email: 'matthew@cochranweb.com',
+        status: 'active',
+        roles: [
+          {
+            productId: '304ed8cf-d3ca-4fed-9fd5-b14eb4de4ed9',
+            roles: ['admin'],
+          },
+          {
+            productId: 'a5c0ddad-950b-45e3-8565-a6abbcdeae15',
+            roles: ['viewer'],
+          },
+        ],
+      },
+    },
+  ],
+};
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -75,13 +257,12 @@ function classNames(...classes: string[]) {
 // to customize the default configuration.
 
 export default function HomePage() {
-  // const { user, login, logout } = useWunderGraph();
+  // const {result: mockData} = useQuery.AdminPortal();
   // const { result: userInfo } = useQuery.;
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
       <Seo />
-
       <div>
         {/**** NAV */}
         <div className='no-scrollbar overflow-x-scroll'>
@@ -205,18 +386,16 @@ export default function HomePage() {
               role='list'
               className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
             >
-              {requests.map((request) => (
+              {portal.requests.map((request) => (
                 <li
-                  key={request.email}
+                  key={request.id}
                   className='col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow'
                 >
                   <div className='border-b border-gray-200 bg-white px-4 py-5 sm:px-6'>
                     <h3 className='text-lg font-medium leading-6 text-gray-900'>
-                      Request Type
+                      {request.title}
                     </h3>
-                    <p className='mt-1 text-sm text-gray-500'>
-                      Brief Description
-                    </p>
+                    <p className='mt-1 text-sm text-gray-500'>{request.type}</p>
                     <dd className='mt-3'>
                       <span className='rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800'>
                         {request.cost}
@@ -236,12 +415,12 @@ export default function HomePage() {
                       <div className='min-w-0 flex-1'>
                         <p className='text-sm font-medium text-gray-900'>
                           <a href='#' className='hover:underline'>
-                            {request.name}
+                            {request.user.firstName} {request.user.lastName}
                           </a>
                         </p>
                         <p className='text-sm text-gray-500'>
                           <a href='#' className='hover:underline'>
-                            {request.time}
+                            {request.timestamp}
                           </a>
                         </p>
                       </div>
@@ -249,39 +428,44 @@ export default function HomePage() {
                   </div>
 
                   <div>
-                    <p className='m-3 text-left text-sm'>
-                      Repudiandae sint consequuntur vel. Amet ut nobis explicabo
-                      numquam expedita quia omnis voluptatem. Minus quidem ipsam
-                      quia iusto.
-                    </p>
+                    <p className='m-3 text-left text-sm'>{request.note}</p>
                   </div>
-
                   <div>
                     <div className='-mt-px flex divide-x divide-gray-200'>
-                      <div className='flex w-0 flex-1'>
-                        <a
-                          href={`mailto:${request.email}`}
-                          className='relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500'
-                        >
-                          <ThumbDownIcon
-                            className='h-5 w-5 text-gray-400'
-                            aria-hidden='true'
-                          />
-                          <span className='ml-3'>Deny</span>
-                        </a>
-                      </div>
-                      <div className='-ml-px flex w-0 flex-1'>
-                        <a
-                          href={`tel:${request.telephone}`}
-                          className='relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500'
-                        >
-                          <span className='mr-3'>Approve</span>
-                          <ThumbUpIcon
-                            className='h-5 w-5 text-gray-400'
-                            aria-hidden='true'
-                          />
-                        </a>
-                      </div>
+                      {request.actions.map((action) => (
+                        <>
+                          {action.key === 'deny' ? (
+                            <div className='flex w-0 flex-1' key={action.key}>
+                              <a
+                                href={`mailto:${request.user.email}`}
+                                className='relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500'
+                              >
+                                <ThumbDownIcon
+                                  className='h-5 w-5 text-gray-400'
+                                  aria-hidden='true'
+                                />
+                                <span className='ml-3'>{action.key}</span>
+                              </a>
+                            </div>
+                          ) : (
+                            <div
+                              className='-ml-px flex w-0 flex-1'
+                              key={action.key}
+                            >
+                              <a
+                                href={`mailto:${request.user.email}`}
+                                className='relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500'
+                              >
+                                <span className='mr-3'>{action.key}</span>
+                                <ThumbUpIcon
+                                  className='h-5 w-5 text-gray-400'
+                                  aria-hidden='true'
+                                />
+                              </a>
+                            </div>
+                          )}
+                        </>
+                      ))}
                     </div>
                   </div>
                 </li>

@@ -11,7 +11,7 @@ export default function AuthenticateButton() {
   if (user == null) {
     return (
       <a
-        onClick={() => login.github()}
+        onClick={() => login.keycloak()}
         href='#'
         className='flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8'
       >
@@ -22,7 +22,7 @@ export default function AuthenticateButton() {
 
   return (
     <a
-      onClick={() => logout()}
+      onClick={() => logout({ logout_openid_connect_provider: true })}
       href='#'
       className='flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8'
     >

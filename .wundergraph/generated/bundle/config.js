@@ -474,8 +474,22 @@ var mockData = Convert.toPortal(`{
 	"payments": [
 	]
 }`);
-var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((serverContext) => ({
+var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)(() => ({
   hooks: {
+    global: {
+      httpTransport: {
+        onOriginRequest: {
+          enableForAllOperations: true,
+          hook: async ({ request, user }) => {
+            return __spreadProps(__spreadValues({}, request), {
+              headers: __spreadProps(__spreadValues({}, request.headers), {
+                Authorization: `Bearer ${user == null ? void 0 : user.rawIdToken}`
+              })
+            });
+          }
+        }
+      }
+    },
     queries: {},
     mutations: {}
   },
@@ -523,7 +537,13 @@ var wundergraph_operations_default = (0, import_sdk2.configureWunderGraphOperati
     }),
     mutations: (config) => __spreadValues({}, config),
     subscriptions: (config) => __spreadValues({}, config),
-    custom: {}
+    custom: {
+      AdminPortal: (config) => __spreadProps(__spreadValues({}, config), {
+        authentication: {
+          required: true
+        }
+      })
+    }
   }
 });
 
@@ -568,10 +588,11 @@ var myApplication = new import_sdk3.Application({
     cookieBased: {
       providers: [
         import_sdk3.authProviders.demo(),
-        import_sdk3.authProviders.google({
-          id: "google",
-          clientId: "xxx.apps.googleusercontent.com",
-          clientSecret: "xxx"
+        import_sdk3.authProviders.openIdConnect({
+          id: "keycloak",
+          clientId: "test-client-app",
+          clientSecret: "xxxx-xxxx-xxxx-xxxx",
+          issuer: "xxxx-xxxx-xxxx-xxxx"
         })
       ],
       authorizedRedirectUris: ["http://localhost:3000"]

@@ -9,7 +9,7 @@ export const WUNDERGRAPH_AUTH_ENABLED = true;
 
 export enum AuthProviderId {
 	"github" = "github",
-	"google" = "google",
+	"keycloak" = "keycloak",
 }
 
 export interface AuthProvider {
@@ -38,9 +38,9 @@ export class Client {
 	private customFetch?: (input: RequestInfo, init?: RequestInit) => Promise<globalThis.Response>;
 	private extraHeaders?: Headers;
 	private readonly baseURL: string = "http://localhost:9991";
-	private readonly applicationHash: string = "ae75ea4e";
+	private readonly applicationHash: string = "e357dd89";
 	private readonly applicationPath: string = "api/main";
-	private readonly sdkVersion: string = "1.0.0-next.31";
+	private readonly sdkVersion: string = "0.95.0";
 	private csrfToken: string | undefined;
 	private user: User | null;
 	private userListener: UserListener<User> | undefined;
@@ -138,43 +138,24 @@ export class Client {
 			};
 		}
 	};
-	private inflight: {
-		[key: string]: {
-			reject: (reason?: any) => void;
-			resolve: (value: globalThis.Response | PromiseLike<globalThis.Response>) => void;
-		}[];
-	} = {};
-	private fetch = (input: globalThis.RequestInfo, init?: RequestInit): Promise<any> => {
-		const key = input.toString();
-		return new Promise<any>(async (resolve, reject) => {
-			if (this.inflight[key]) {
-				this.inflight[key].push({ resolve, reject });
-				return;
-			}
-			this.inflight[key] = [{ resolve, reject }];
-			try {
-				const f = this.customFetch || fetch;
-				const res = await f(input, init);
-				const inflight = this.inflight[key];
-				if (res.status === 200) {
-					const json = await res.json();
-					delete this.inflight[key];
-					setTimeout(() => {
-						inflight.forEach((cb) => cb.resolve(json));
-					}, 0);
-				}
-				if (res.status >= 401 && res.status <= 499) {
-					this.csrfToken = undefined;
-					delete this.inflight[key];
-					inflight.forEach((cb) => cb.reject("unauthorized"));
-					this.fetchUser();
-				}
-			} catch (e: any) {
-				const inflight = this.inflight[key];
-				delete this.inflight[key];
-				inflight.forEach((cb) => cb.reject(e));
-			}
-		});
+	private fetch = async (input: globalThis.RequestInfo, init?: RequestInit): Promise<any> => {
+		const makeRequest = this.customFetch || fetch;
+		const res = await makeRequest(input, init);
+
+		if (res.status === 200) {
+			return res.json();
+		} else if (res.status === 400) {
+			throw new Error("bad request");
+		} else if (res.status >= 401 && res.status <= 499) {
+			this.csrfToken = undefined;
+			// invalidate user session
+			this.fetchUser().catch(() => console.error("failed to invalidate user session"));
+			throw new Error("unauthorized");
+		} else if (res.status >= 500 && res.status <= 599) {
+			throw new Error("server error");
+		}
+
+		throw new Error(`unhandled status code: ${res.status}`);
 	};
 
 	private startSubscription = <T>(fetchConfig: FetchConfig, cb: (response: Response<T>) => void) => {
@@ -275,8 +256,8 @@ export class Client {
 		github: (redirectURI?: string): void => {
 			this.startLogin(AuthProviderId.github, redirectURI);
 		},
-		google: (redirectURI?: string): void => {
-			this.startLogin(AuthProviderId.google, redirectURI);
+		keycloak: (redirectURI?: string): void => {
+			this.startLogin(AuthProviderId.keycloak, redirectURI);
 		},
 	};
 	public authProviders: Array<AuthProvider> = [
@@ -285,8 +266,8 @@ export class Client {
 			login: this.login[AuthProviderId.github],
 		},
 		{
-			id: AuthProviderId.google,
-			login: this.login[AuthProviderId.google],
+			id: AuthProviderId.keycloak,
+			login: this.login[AuthProviderId.keycloak],
 		},
 	];
 	public logout = async (options?: LogoutOptions): Promise<boolean> => {
