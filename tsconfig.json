@@ -21,6 +21,6 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "./src/components/generated"],
+  "exclude": ["node_modules", "**/hooks.*"],
   "moduleResolution": ["node_modules", ".next", "node"]
 }
