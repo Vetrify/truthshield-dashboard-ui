@@ -1,22 +1,4 @@
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a2, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a2, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a2, prop, b[prop]);
-    }
-  return a2;
-};
-var __spreadProps = (a2, b) => __defProps(a2, __getOwnPropDescs(b));
+"use strict";
 
 // wundergraph.config.ts
 var import_sdk3 = require("@wundergraph/sdk");
@@ -474,8 +456,24 @@ var mockData = Convert.toPortal(`{
 	"payments": [
 	]
 }`);
-var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((serverContext) => ({
+var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)(() => ({
   hooks: {
+    global: {
+      httpTransport: {
+        onOriginRequest: {
+          enableForAllOperations: true,
+          hook: async ({ request, user }) => {
+            return {
+              ...request,
+              headers: {
+                ...request.headers,
+                Authorization: `Bearer ${user == null ? void 0 : user.rawIdToken}`
+              }
+            };
+          }
+        }
+      }
+    },
     queries: {},
     mutations: {}
   },
@@ -509,7 +507,8 @@ var wundergraph_operations_default = (0, import_sdk2.configureWunderGraphOperati
         required: false
       }
     },
-    queries: (config) => __spreadProps(__spreadValues({}, config), {
+    queries: (config) => ({
+      ...config,
       caching: {
         enable: false,
         staleWhileRevalidate: 60,
@@ -521,9 +520,20 @@ var wundergraph_operations_default = (0, import_sdk2.configureWunderGraphOperati
         pollingIntervalSeconds: 1
       }
     }),
-    mutations: (config) => __spreadValues({}, config),
-    subscriptions: (config) => __spreadValues({}, config),
-    custom: {}
+    mutations: (config) => ({
+      ...config
+    }),
+    subscriptions: (config) => ({
+      ...config
+    }),
+    custom: {
+      AdminPortal: (config) => ({
+        ...config,
+        authentication: {
+          required: true
+        }
+      })
+    }
   }
 });
 
@@ -561,17 +571,18 @@ var myApplication = new import_sdk3.Application({
       path: "../src/components/generated"
     }
   ],
-  cors: __spreadProps(__spreadValues({}, import_sdk3.cors.allowAll), {
+  cors: {
+    ...import_sdk3.cors.allowAll,
     allowedOrigins: process.env.NODE_ENV === "production" ? ["http://localhost:3000"] : ["http://localhost:3000"]
-  }),
+  },
   authentication: {
     cookieBased: {
       providers: [
         import_sdk3.authProviders.demo(),
         import_sdk3.authProviders.google({
-          id: "google",
-          clientId: "xxx.apps.googleusercontent.com",
-          clientSecret: "xxx"
+          id: "googleDev",
+          clientId: "689393364183-9h374uh63batklf328nbma23gre4aq3q.apps.googleusercontent.com",
+          clientSecret: "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"
         })
       ],
       authorizedRedirectUris: ["http://localhost:3000"]

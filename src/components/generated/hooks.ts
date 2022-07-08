@@ -183,13 +183,13 @@ export const useLoadingComplete = (...responses: Response<any>[]) => {
 export const useQuery = {
 	AdminPortal: (options?: RequestOptions<never, AdminPortalResponse>) => {
 		const { client } = useWunderGraph();
-		return Query(client.query.AdminPortal, { requiresAuthentication: false }, options);
+		return Query(client.query.AdminPortal, { requiresAuthentication: true }, options);
 	},
 };
 
 export const useLiveQuery = {
 	AdminPortal: (options?: SubscriptionRequestOptions) => {
 		const { client } = useWunderGraph();
-		return Subscription(client.liveQuery.AdminPortal, { requiresAuthentication: false }, options);
+		return Subscription(client.liveQuery.AdminPortal, { requiresAuthentication: true }, options);
 	},
 };

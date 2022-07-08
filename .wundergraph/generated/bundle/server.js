@@ -1,3 +1,4 @@
+"use strict";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -474,8 +475,24 @@ var mockData = Convert.toPortal(`{
 	"payments": [
 	]
 }`);
-var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)((serverContext) => ({
+var wundergraph_server_default = (0, import_sdk.configureWunderGraphServer)(() => ({
   hooks: {
+    global: {
+      httpTransport: {
+        onOriginRequest: {
+          enableForAllOperations: true,
+          hook: async ({ request, user }) => {
+            return {
+              ...request,
+              headers: {
+                ...request.headers,
+                Authorization: `Bearer ${user == null ? void 0 : user.rawIdToken}`
+              }
+            };
+          }
+        }
+      }
+    },
     queries: {},
     mutations: {}
   },
