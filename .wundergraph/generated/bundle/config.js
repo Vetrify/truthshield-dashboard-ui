@@ -579,11 +579,10 @@ var myApplication = new import_sdk3.Application({
     cookieBased: {
       providers: [
         import_sdk3.authProviders.demo(),
-        import_sdk3.authProviders.openIdConnect({
-          id: "keycloak",
-          clientId: "test-client-app",
-          clientSecret: "xxxx-xxxx-xxxx-xxxx",
-          issuer: "xxxx-xxxx-xxxx-xxxx"
+        import_sdk3.authProviders.google({
+          id: "googleDev",
+          clientId: "689393364183-9h374uh63batklf328nbma23gre4aq3q.apps.googleusercontent.com",
+          clientSecret: "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"
         })
       ],
       authorizedRedirectUris: ["http://localhost:3000"]

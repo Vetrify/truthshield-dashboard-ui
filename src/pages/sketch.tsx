@@ -19,7 +19,7 @@
 import * as React from 'react';
 
 import Button from '@/components/buttons/Button';
-import { useQuery } from '@/components/generated/wundergraph.nextjs.integration';
+import { useQuery } from '@/components/generated/hooks';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 
@@ -45,7 +45,7 @@ export default function SketchPage() {
 
       <div className='m-40'>
         <Button className='align-middle'>Click me!</Button>
-        <div>{data.result.status}</div>
+        <div>{data.response.status}</div>
       </div>
     </Layout>
   );

@@ -167,17 +167,20 @@ configureWunderGraphApplication({
     cookieBased: {
       providers: [
         authProviders.demo(),
-      //   authProviders.google({
-      //     id: "google",
-      //     clientId: "xxx.apps.googleusercontent.com",
-      //     clientSecret: "xxx",
-      // }),
-      authProviders.openIdConnect({
-        id: "keycloak",
-        clientId: "test-client-app",
-        clientSecret: "xxxx-xxxx-xxxx-xxxx",
-        issuer: "xxxx-xxxx-xxxx-xxxx"
+
+        // NOTE: THIS IS FOR DEV TESTING ONLY!!!
+        //       WE ARE USING KEYCLOAK FOR PROD
+        authProviders.google({
+          id: "googleDev",
+          clientId: "689393364183-9h374uh63batklf328nbma23gre4aq3q.apps.googleusercontent.com",
+          clientSecret: "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",
       }),
+      // authProviders.openIdConnect({
+      //   id: "keycloak",
+      //   clientId: "test-client-app",
+      //   clientSecret: "xxxx-xxxx-xxxx-xxxx",
+      //   issuer: "xxxx-xxxx-xxxx-xxxx"
+      // }),
     ],
       authorizedRedirectUris: ['http://localhost:3000'],
     },
