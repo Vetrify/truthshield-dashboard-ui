@@ -17,8 +17,8 @@
 */
 
 import * as React from 'react';
-import Button from 'src/components/buttons/Button';
 
+import Button from '@/components/buttons/Button';
 import { useQuery } from '@/components/generated/wundergraph.nextjs.integration';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
